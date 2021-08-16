@@ -13,12 +13,16 @@ void inOrderVotos(No *raiz);
 void resultadoParcial(No *no);
 void ordernaVotacao(No *arvoreTitulos, No **arvoreDecrescente);
 void imprimeDecrescente(No *no);
+void imprimeDecrescenteWin(No *no);
 void inOrderVotou(No *raiz, No *arvoreVotos);
+void inOrderVotouWin(No *raiz, No *arvoreVotos);
 int existeTitulo(No* pRaiz, int titulo);
 
 //funcoes para funcionamento da interface
 void menu();
+void menuWin();
 void menuVotacao();
+void menuVotacaoWin();
 void delay(int seg);
 
 #endif

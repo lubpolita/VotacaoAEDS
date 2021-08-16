@@ -34,18 +34,20 @@ int main(){
     arvoreOrdenada = (No*)malloc(sizeof(No));
 
     criaArvore(&arvoreTitulos); //criando arvore de titulos
+    criaArvore(&arvoreOrdenada);
     
     //laco do menu principal
-    while(opcao != 9){
+    while(opcao != 8){
 
         //limpar a tela
         #ifdef OS_Windows
             system("cls");
+	    menuWin();
         #else
             system("clear");
+	    menu(); //menu principal
         #endif
 
-        menu(); //menu principal
 
         #ifdef OS_Windows
             fflush(stdin);
@@ -59,18 +61,20 @@ int main(){
             case 1:
                 info = (Info *) malloc(sizeof(Info));
                 titulo = -1;
-                printf("\n➢ Digite o nome do eleitor: ");
                 #ifdef OS_Windows
+                printf("\n%c Digite o nome do eleitor: ", 175);
                 fflush(stdin);
                 #else
+                printf("\n➢ Digite o nome do eleitor: ");
                 __fpurge(stdin); //limpa o buffer
                 #endif
                 fgets(info->Nome, 50, stdin);
                 while(titulo <= 0){
-                    printf("\n➢ Digite o titulo do eleitor: ");
                     #ifdef OS_Windows
+                    printf("\n%c Digite o titulo do eleitor: ", 175);
                     fflush(stdin);
                     #else
+                    printf("\n➢ Digite o titulo do eleitor: ");
                     __fpurge(stdin); //limpa o buffer
                     #endif
                     scanf("%d", &titulo);
@@ -101,10 +105,11 @@ int main(){
                 break;
             
             case 2:
-                printf("\n➢ Digite o titulo que voce deseja excluir: ");
                 #ifdef OS_Windows
+                    printf("\n%c Digite o titulo que voce deseja excluir: ", 175);
                     fflush(stdin);
                 #else
+                    printf("\n➢ Digite o titulo que voce deseja excluir: ");
                     __fpurge(stdin); //limpa o buffer
                 #endif
                 scanf("%d", &titulo);
@@ -140,6 +145,7 @@ int main(){
                     corPadrao();
                     printf("\n1) Continuar.");
                     printf("\n2) Cancelar.");
+                    printf("\nDigite sua opcao: ");
                     #ifdef OS_Windows
                         fflush(stdin);
                     #else
@@ -170,10 +176,11 @@ int main(){
                     delay(2);
                 }
                 else{
-                    printf("\n➢ Digite o numero do seu titulo para continuar: ");
                     #ifdef OS_Windows
+                        printf("\n%c Digite o numero do seu titulo para continuar: ", 175);
                         fflush(stdin);
                     #else
+                    printf("\n➢ Digite o numero do seu titulo para continuar: ");
                         __fpurge(stdin); //limpa o buffer
                     #endif
                     scanf("%d", &titulo);
@@ -184,10 +191,11 @@ int main(){
                         info = (Info *) malloc(sizeof(Info));
                         info->titulo_eleitor = titulo;
 
-                        menuVotacao(); //inicia menu
                         #ifdef OS_Windows
+                        menuVotacaoWin();
                         fflush(stdin);
                         #else
+                        menuVotacao(); //inicia menu
                         __fpurge(stdin); //limpa o buffer
                         #endif
 
@@ -221,10 +229,11 @@ int main(){
                 break;
             case 5:
                 if(!vazia(arvoreVotos) && ocorreuVotacao != 0){
-                    printf("\n➢ Digite o numero do seu titulo para continuar: ");
                     #ifdef OS_Windows
+                        printf("\n%c Digite o numero do seu titulo para continuar: ", 175);
                         fflush(stdin);
                     #else
+                        printf("\n➢ Digite o numero do seu titulo para continuar: ");
                         __fpurge(stdin); //limpa o buffer
                     #endif
                     scanf("%d", &titulo);
@@ -256,14 +265,14 @@ int main(){
 
             case 6:
                 //resultado parcial
-                criaArvore(&arvoreOrdenada);
                 ordernaVotacao(arvoreTitulos, &arvoreOrdenada);
-                imprimeDecrescente(arvoreOrdenada);
                 #ifdef OS_Windows
+                    imprimeDecrescenteWin(arvoreOrdenada);
                     fflush(stdin);
                     system("PAUSE");
                 #else
-                printf("\nPara continuar pressione ENTER...");
+                    imprimeDecrescente(arvoreOrdenada);
+                    printf("\nPara continuar pressione ENTER...");
                     __fpurge(stdin); //limpa o buffer
                     getchar();
                 #endif
@@ -276,11 +285,12 @@ int main(){
                     delay(2);
                 }
                 else{
-                    inOrderVotou(arvoreTitulos, arvoreVotos);
                     #ifdef OS_Windows
+                        inOrderVotouWin(arvoreTitulos, arvoreVotos);
                         fflush(stdin);
                         system("PAUSE");
                     #else
+                        inOrderVotou(arvoreTitulos, arvoreVotos);
                         printf("\nPara continuar pressione ENTER...");
                         __fpurge(stdin); //limpa o buffer
                         getchar();
@@ -314,7 +324,7 @@ int main(){
                 break;
             case 8:
                 arvoreTitulos = liberar(&arvoreTitulos);
-                arvoreVotos = liberar(&arvoreVotos);
+                if(ocorreuVotacao != 0) arvoreVotos = liberar(&arvoreVotos);
                 arvoreOrdenada = liberar(&arvoreOrdenada);
                 corCiano();
                 printf("\nSaindo...\n");
