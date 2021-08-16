@@ -59,7 +59,7 @@ int main(){
             case 1:
                 info = (Info *) malloc(sizeof(Info));
                 titulo = -1;
-                printf("\nDigite o nome do eleitor: ");
+                printf("\n➢ Digite o nome do eleitor: ");
                 #ifdef OS_Windows
                 fflush(stdin);
                 #else
@@ -67,7 +67,7 @@ int main(){
                 #endif
                 fgets(info->Nome, 50, stdin);
                 while(titulo <= 0){
-                    printf("\nDigite o titulo do eleitor: ");
+                    printf("\n➢ Digite o titulo do eleitor: ");
                     #ifdef OS_Windows
                     fflush(stdin);
                     #else
@@ -101,7 +101,7 @@ int main(){
                 break;
             
             case 2:
-                printf("\nDigite o titulo que voce deseja excluir: ");
+                printf("\n➢ Digite o titulo que voce deseja excluir: ");
                 #ifdef OS_Windows
                     fflush(stdin);
                 #else
@@ -136,7 +136,7 @@ int main(){
                 }
                 else{ 
                     corVermelho();
-                    printf("\nCuidado! Iniciar uma nova votacao ira excluir a votacao anterior, deseja continuar? ");
+                    printf("\n☢ Cuidado! Iniciar uma nova votacao ira excluir a votacao anterior, deseja continuar? ");
                     corPadrao();
                     printf("\n1) Continuar.");
                     printf("\n2) Cancelar.");
@@ -170,7 +170,7 @@ int main(){
                     delay(2);
                 }
                 else{
-                    printf("\nDigite o numero do seu titulo para continuar: ");
+                    printf("\n➢ Digite o numero do seu titulo para continuar: ");
                     #ifdef OS_Windows
                         fflush(stdin);
                     #else
@@ -221,7 +221,7 @@ int main(){
                 break;
             case 5:
                 if(!vazia(arvoreVotos) && ocorreuVotacao != 0){
-                    printf("\nDigite o numero do seu titulo para continuar: ");
+                    printf("\n➢ Digite o numero do seu titulo para continuar: ");
                     #ifdef OS_Windows
                         fflush(stdin);
                     #else
@@ -243,11 +243,13 @@ int main(){
                         corVermelho();
                         printf("\nO titulo digitado nao existe!\n");
                         corPadrao();
+                        delay(2);
                     }
                 } 
                 else{
                     corVermelho();
                     printf("\nERRO! Ainda nao foram registrados votos.\n");
+                    delay(2);
                     corPadrao;
                 }
                 break;

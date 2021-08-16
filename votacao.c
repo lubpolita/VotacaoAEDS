@@ -61,7 +61,7 @@ void inOrderVotou(No *raiz, No *arvoreVotos){
             corCiano();
             printf("\n---------------------------------------\n");
             corPadrao();
-            printf("|Nome: %s\n|Titulo: %d\n", raiz->info->Nome, raiz->info->titulo_eleitor);
+            printf("║Nome║ %s\n║Titulo║ %d\n", raiz->info->Nome, raiz->info->titulo_eleitor);
         }
         inOrderVotou(raiz->dir, arvoreVotos);
     }
@@ -74,8 +74,8 @@ void inOrderTitulos(No *raiz)
     {
         inOrderTitulos(raiz->esq);
         printf("\n---------------------------------------\n");
-        printf("|Nome: %s\n|Titulo: %d\n", raiz->info->Nome, raiz->info->titulo_eleitor);
-        printf("\n|Vezes votado: %.0lf\n", raiz->info->vezesVotado);
+        printf("║Nome║ %s\n║Titulo║ %d\n", raiz->info->Nome, raiz->info->titulo_eleitor);
+        printf("\n║Vezes votado║ %.0lf\n", raiz->info->vezesVotado);
         inOrderTitulos(raiz->dir);
     }
 }
@@ -87,7 +87,7 @@ void inOrderVotos(No *raiz)
     {
         inOrderVotos(raiz->esq);
         printf("\n\n_____________________________________\n");
-        printf("\n|Titulo: %d                            |\n|Voto: %d                             |", raiz->info->titulo_eleitor, raiz->info->voto);
+        printf("\n║Titulo║ %d                            ║\n║Voto║ %d                             ║", raiz->info->titulo_eleitor, raiz->info->voto);
         inOrderVotos(raiz->dir);
     }
 }
@@ -97,13 +97,14 @@ void imprimeDecrescente(No *no){
     if(no){
         imprimeDecrescente(no->dir);
         corCiano();
-        printf("\n\n:----------------------------ELEITOR----------------------------:\n");
+        printf("\n\n╔═══════════════════════════════════════════════════════════════╗");
+        printf("\n║----------------------------ELEITOR----------------------------║\n");
         corPadrao();
-        printf("\n|Nome: %s",no->info->Nome);
-        printf("\n|Titulo: %d \n", no->info->titulo_eleitor);
-        printf("\n|Votos: %.0lf \n", no->info->vezesVotado);
+        printf("\n║Nome: %s",no->info->Nome);
+        printf("\n║Titulo: %d \n", no->info->titulo_eleitor);
+        printf("\n║Votos: %.0lf \n", no->info->vezesVotado);
         corCiano();
-        printf("\n:---------------------------------------------------------------:\n");
+        printf("\n╚═══════════════════════════════════════════════════════════════╝\n");
         corPadrao();
         imprimeDecrescente(no->esq);
     }
@@ -126,34 +127,36 @@ void ordernaVotacao(No *arvoreTitulos, No **arvoreDecrescente){
 //funcao para imprimir o menu para o usuario
 void menu(){
     corCiano();
-    printf("\n:-----------------------------MENU------------------------------:");
-    printf("\n: "); corPadrao(); printf("1) Cadastrar titulo");
-    corCiano(); printf("                                           :");
-    printf("\n: "); corPadrao(); printf("2) Descadastrar titulo");
-    corCiano(); printf("                                        :");
-    printf("\n: "); corPadrao(); printf("3) Iniciar nova votacao");
-    corCiano(); printf("                                       :");
-    printf("\n: "); corPadrao(); printf("4) Votar"); 
-    corCiano(); printf("                                                      :");
-    printf("\n: "); corPadrao(); printf("5) Retirar voto"); 
-    corCiano(); printf("                                               :");
-    printf("\n: "); corPadrao(); printf("6) Resultado parcial"); 
-    corCiano(); printf("                                          :");
-    printf("\n: "); corPadrao(); printf("7) Listar todos nomes/titulos de pessoas que ja votaram");
-    corCiano(); printf("       :");
-    printf("\n: "); corPadrao(); printf("8) Sair");
-    corCiano(); printf("                                                       :");
-    printf("\n:---------------------------------------------------------------:\n");
+    printf("\n╔═══════════════════════════════════════════════════════════════╗");
+    printf("\n║                              MENU                             ║");
+    printf("\n╠═══════════════════════════════════════════════════════════════╣");
+    printf("\n║ "); corPadrao(); printf("1) Cadastrar titulo");
+    corCiano(); printf("                                           ║");
+    printf("\n║ "); corPadrao(); printf("2) Descadastrar titulo");
+    corCiano(); printf("                                        ║");
+    printf("\n║ "); corPadrao(); printf("3) Iniciar nova votacao");
+    corCiano(); printf("                                       ║");
+    printf("\n║ "); corPadrao(); printf("4) Votar"); 
+    corCiano(); printf("                                                      ║");
+    printf("\n║ "); corPadrao(); printf("5) Retirar voto"); 
+    corCiano(); printf("                                               ║");
+    printf("\n║ "); corPadrao(); printf("6) Resultado parcial"); 
+    corCiano(); printf("                                          ║");
+    printf("\n║ "); corPadrao(); printf("7) Listar todos nomes/titulos de pessoas que ja votaram");
+    corCiano(); printf("       ║");
+    printf("\n║ "); corPadrao(); printf("8) Sair");
+    corCiano(); printf("                                                       ║");
+    printf("\n╚═══════════════════════════════════════════════════════════════╝\n");
     corPadrao();
-    printf("\nDigite a opcao desejada: ");
+    printf("\n➢ Digite a opcao desejada: ");
 }
 
 void menuVotacao(){
-    corCiano();
-    printf("\n:--------------------------VOTE--------------------------------:");
-    printf("\n:");
+    corCiano(); 
+    printf("\n║--------------------------VOTE--------------------------------║");
+    printf("\n║");
     corPadrao();
-    printf("Digite o titulo da pessoa que deseja votar: ");
+    printf("➢ Digite o titulo da pessoa que deseja votar: ");
 }
 
 //funcao para adicionar um delay na tela do usuario, para que as mensagens possam ser lidas
