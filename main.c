@@ -3,11 +3,11 @@
 #include <string.h>
 #include "arvoreBinaria.h"
 #include "votacao.h"
+#include "cores.h"
 
 //para que seja possivel diferenciar os SO
 #ifdef __unix__
 #include <unistd.h>
-#include <stdlib.h>
 #include <stdio_ext.h>
 
 #elif defined(_WIN32) || defined(WIN32)
@@ -74,17 +74,29 @@ int main(){
                     __fpurge(stdin); //limpa o buffer
                     #endif
                     scanf("%d", &titulo);
-                    int search = existeTitulo(arvoreTitulos, titulo);
-                    if(search == titulo){
-                        printf("\nEste titulo ja existe! Espere uns segundos para tentar novamente...\n");
-                        titulo = -1;
+                    if(titulo < 0){
+                        corVermelho();
+                        printf("\nPor favor, digite um numero maior que 0. \n");
+                        corPadrao();
                         delay(2);
+                    }
+                    else{
+                        int search = existeTitulo(arvoreTitulos, titulo);
+                        if(search == titulo){
+                            corVermelho();
+                            printf("\nEste titulo ja existe! Espere uns segundos para tentar novamente...\n");
+                            corPadrao();
+                            titulo = -1;
+                            delay(2);
+                        }
                     }
                 }
                 info->titulo_eleitor = titulo;
                 info->vezesVotado = 0;
                 insere(&arvoreTitulos, info);
+                corVerde();
                 printf("\nEleitor criado! \n");
+                corPadrao();
                 delay(2);
                 break;
             
@@ -99,12 +111,16 @@ int main(){
                 info = retornaInfoTitulo(arvoreTitulos, titulo);
                 if(info){
                     retira(*info, &arvoreTitulos);
-                    printf("\nTitulo excluido com sucesso! Digite 7 para ver a nova lista de titulos.\n");
+                    corVerde();
+                    printf("\nTitulo excluido com sucesso!\n");
+                    corPadrao();
                     delay(3);
 
                 }
                 else{
+                    corVermelho();
                     printf("\nEste titulo nao existe na lista!\n");
+                    corPadrao();
                     delay(2);
                 }
                 break;
@@ -113,11 +129,15 @@ int main(){
                 if(ocorreuVotacao == 0) {
                     criaArvore(&arvoreVotos);
                     ocorreuVotacao = 1;
+                    corVerde();
                     printf("\nVotacao iniciada com sucesso!\n");
+                    corPadrao();
                     delay(2);
                 }
                 else{ 
+                    corVermelho();
                     printf("\nCuidado! Iniciar uma nova votacao ira excluir a votacao anterior, deseja continuar? ");
+                    corPadrao();
                     printf("\n1) Continuar.");
                     printf("\n2) Cancelar.");
                     #ifdef OS_Windows
@@ -130,7 +150,9 @@ int main(){
                         arvoreVotos = liberar(&arvoreVotos);
                         arvoreVotos = (No*)malloc(sizeof(No));
                         criaArvore(&arvoreVotos);
+                        corVerde();
                         printf("\nVotacao iniciada com sucesso!\n");
+                        corPadrao();
                         delay(2);
                     }
                     else{
@@ -142,7 +164,9 @@ int main(){
 
             case 4:
                 if(ocorreuVotacao == 0){
+                    corVermelho();
                     printf("\nPor favor, inicie uma votacao antes de continuar... ");
+                    corPadrao();
                     delay(2);
                 }
                 else{
@@ -175,39 +199,56 @@ int main(){
                             aux->info->vezesVotado++;
                             totalVotos++;
                             insere(&arvoreVotos, info); //adicionando info na arvore de votos
-                            printf("\nSeu voto foi armazenado com sucesso! \n");
+                            corVerde();
+                            printf("\nSeu voto foi armazenado com sucesso!\n");
+                            corPadrao();
                             delay(2);
                         }
                         else{
-                            printf("\nO titulo que voce quer votar nao existe! ");
+                            corVermelho();
+                            printf("\nO titulo que voce quer votar nao existe!\n");
+                            corPadrao();
                             delay(2);
                         }
                     }
                     else{
+                        corVermelho();
                         printf("\nO titulo digitado nao existe ou ja votou! \n");
+                        corPadrao();
                         delay(2);
                     }
                 }
                 break;
             case 5:
-                printf("\nDigite o numero do seu titulo para continuar: ");
-                #ifdef OS_Windows
-                    fflush(stdin);
-                #else
-                    __fpurge(stdin); //limpa o buffer
-                #endif
-                scanf("%d", &titulo);
-                info = retornaInfoTitulo(arvoreVotos, titulo); 
-                if(info){
-                    totalVotos--;
-                    aux = retornaNoTitulo(arvoreTitulos, info->voto);
-                    aux->info->vezesVotado--;
-                    retira(*info, &arvoreVotos);
-                    printf("\nVoto excluido com sucesso! ");
-                    delay(2);
-                }
+                if(!vazia(arvoreVotos) && ocorreuVotacao != 0){
+                    printf("\nDigite o numero do seu titulo para continuar: ");
+                    #ifdef OS_Windows
+                        fflush(stdin);
+                    #else
+                        __fpurge(stdin); //limpa o buffer
+                    #endif
+                    scanf("%d", &titulo);
+                    info = retornaInfoTitulo(arvoreVotos, titulo); 
+                    if(info){
+                        totalVotos--;
+                        aux = retornaNoTitulo(arvoreTitulos, info->voto);
+                        aux->info->vezesVotado--;
+                        retira(*info, &arvoreVotos);
+                        corVerde();
+                        printf("\nVoto excluido com sucesso!\n");
+                        corPadrao();
+                        delay(2);
+                    }
+                    else{
+                        corVermelho();
+                        printf("\nO titulo digitado nao existe!\n");
+                        corPadrao();
+                    }
+                } 
                 else{
-                    printf("\nO titulo digitado nao existe! ");
+                    corVermelho();
+                    printf("\nERRO! Ainda nao foram registrados votos.\n");
+                    corPadrao;
                 }
                 break;
 
@@ -216,26 +257,33 @@ int main(){
                 criaArvore(&arvoreOrdenada);
                 ordernaVotacao(arvoreTitulos, &arvoreOrdenada);
                 imprimeDecrescente(arvoreOrdenada);
-
-                printf("\nPara continuar pressione ENTER...");
                 #ifdef OS_Windows
                     fflush(stdin);
                     system("PAUSE");
                 #else
+                printf("\nPara continuar pressione ENTER...");
                     __fpurge(stdin); //limpa o buffer
                     getchar();
                 #endif
                 break;
             case 7: 
-                inOrderVotou(arvoreTitulos, arvoreVotos);
-                printf("\nPara continuar pressione ENTER...");
-                #ifdef OS_Windows
-                    fflush(stdin);
-                    system("PAUSE");
-                #else
-                    __fpurge(stdin); //limpa o buffer
-                    getchar();
-                #endif
+                if(ocorreuVotacao == 0 || vazia(arvoreVotos)){
+                    corVermelho();
+                    printf("\nAinda nao foram registrados votos. \n");
+                    corPadrao();
+                    delay(2);
+                }
+                else{
+                    inOrderVotou(arvoreTitulos, arvoreVotos);
+                    #ifdef OS_Windows
+                        fflush(stdin);
+                        system("PAUSE");
+                    #else
+                        printf("\nPara continuar pressione ENTER...");
+                        __fpurge(stdin); //limpa o buffer
+                        getchar();
+                    #endif
+                }
                 break;
             case 20: 
                 if(!vazia(arvoreTitulos)){
@@ -266,7 +314,9 @@ int main(){
                 arvoreTitulos = liberar(&arvoreTitulos);
                 arvoreVotos = liberar(&arvoreVotos);
                 arvoreOrdenada = liberar(&arvoreOrdenada);
+                corCiano();
                 printf("\nSaindo...\n");
+                corPadrao();
                 exit(0);
                 break; 
             default:

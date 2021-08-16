@@ -3,6 +3,7 @@
 #include <unistd.h> //delay
 #include "arvoreBinaria.h"
 #include "votacao.h"
+#include "cores.h"
 
 //a funcao retorna o titulo se ele existir e se nao existir retorna 0
 int existeTitulo(No* pRaiz, int titulo) {
@@ -57,7 +58,9 @@ void inOrderVotou(No *raiz, No *arvoreVotos){
     if(raiz){
         inOrderVotou(raiz->esq, arvoreVotos);
         if(retornaInfoTitulo(arvoreVotos, raiz->info->titulo_eleitor)){
+            corCiano();
             printf("\n---------------------------------------\n");
+            corPadrao();
             printf("|Nome: %s\n|Titulo: %d\n", raiz->info->Nome, raiz->info->titulo_eleitor);
         }
         inOrderVotou(raiz->dir, arvoreVotos);
@@ -93,11 +96,15 @@ void inOrderVotos(No *raiz)
 void imprimeDecrescente(No *no){
     if(no){
         imprimeDecrescente(no->dir);
-        printf("\n----------------ELEITOR--------------------\n");
-        printf("\n|Nome: %s ",no->info->Nome);
-        printf("\n|Titulo: %d ", no->info->titulo_eleitor);
-        printf("\n|Votos: %.0lf", no->info->vezesVotado);
-        printf("\n-------------------------------------------\n");
+        corCiano();
+        printf("\n\n:----------------------------ELEITOR----------------------------:\n");
+        corPadrao();
+        printf("\n|Nome: %s",no->info->Nome);
+        printf("\n|Titulo: %d \n", no->info->titulo_eleitor);
+        printf("\n|Votos: %.0lf \n", no->info->vezesVotado);
+        corCiano();
+        printf("\n:---------------------------------------------------------------:\n");
+        corPadrao();
         imprimeDecrescente(no->esq);
     }
 }
@@ -118,7 +125,9 @@ void ordernaVotacao(No *arvoreTitulos, No **arvoreDecrescente){
 
 //funcao para imprimir o menu para o usuario
 void menu(){
+    corCiano();
     printf("\n:-----------------------------MENU------------------------------:");
+    corPadrao();
     printf("\n: 1) Cadastrar titulo                                           :");
     printf("\n: 2) Descadastrar titulo                                        :");
     printf("\n: 3) Iniciar nova votacao                                       :");
@@ -127,14 +136,17 @@ void menu(){
     printf("\n: 6) Resultado parcial                                          :");
     printf("\n: 7) Listar todos nomes/titulos de pessoas que ja votaram       :");
     printf("\n: 8) Sair                                                       :");
+    corCiano();
     printf("\n:---------------------------------------------------------------:\n");
+    corPadrao();
     printf("\nDigite a opcao desejada: ");
-
 }
 
 void menuVotacao(){
-    printf("\n:----------------VOTE----------------:");
-    printf("\nDigite o titulo da pessoa que deseja votar: ");
+    corCiano();
+    printf("\n:--------------------------VOTE--------------------------------:");
+    corPadrao();
+    printf("\n:Digite o titulo da pessoa que deseja votar:");
 }
 
 //funcao para adicionar um delay na tela do usuario, para que as mensagens possam ser lidas
