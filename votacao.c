@@ -127,16 +127,22 @@ void ordernaVotacao(No *arvoreTitulos, No **arvoreDecrescente){
 void menu(){
     corCiano();
     printf("\n:-----------------------------MENU------------------------------:");
-    corPadrao();
-    printf("\n: 1) Cadastrar titulo                                           :");
-    printf("\n: 2) Descadastrar titulo                                        :");
-    printf("\n: 3) Iniciar nova votacao                                       :");
-    printf("\n: 4) Votar                                                      :");
-    printf("\n: 5) Retirar voto                                               :");
-    printf("\n: 6) Resultado parcial                                          :");
-    printf("\n: 7) Listar todos nomes/titulos de pessoas que ja votaram       :");
-    printf("\n: 8) Sair                                                       :");
-    corCiano();
+    printf("\n: "); corPadrao(); printf("1) Cadastrar titulo");
+    corCiano(); printf("                                           :");
+    printf("\n: "); corPadrao(); printf("2) Descadastrar titulo");
+    corCiano(); printf("                                        :");
+    printf("\n: "); corPadrao(); printf("3) Iniciar nova votacao");
+    corCiano(); printf("                                       :");
+    printf("\n: "); corPadrao(); printf("4) Votar"); 
+    corCiano(); printf("                                                      :");
+    printf("\n: "); corPadrao(); printf("5) Retirar voto"); 
+    corCiano(); printf("                                               :");
+    printf("\n: "); corPadrao(); printf("6) Resultado parcial"); 
+    corCiano(); printf("                                          :");
+    printf("\n: "); corPadrao(); printf("7) Listar todos nomes/titulos de pessoas que ja votaram");
+    corCiano(); printf("       :");
+    printf("\n: "); corPadrao(); printf("8) Sair");
+    corCiano(); printf("                                                       :");
     printf("\n:---------------------------------------------------------------:\n");
     corPadrao();
     printf("\nDigite a opcao desejada: ");
@@ -145,8 +151,9 @@ void menu(){
 void menuVotacao(){
     corCiano();
     printf("\n:--------------------------VOTE--------------------------------:");
+    printf("\n:");
     corPadrao();
-    printf("\n:Digite o titulo da pessoa que deseja votar:");
+    printf("Digite o titulo da pessoa que deseja votar: ");
 }
 
 //funcao para adicionar um delay na tela do usuario, para que as mensagens possam ser lidas

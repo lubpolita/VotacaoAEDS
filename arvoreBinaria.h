@@ -5,12 +5,6 @@
 
 /*Estrutura da arvore*/
 
-typedef struct candidatos{
-    char Nome[50];
-    int num;
-    double totalVotos;
-}Candidato;
-
 typedef struct Info_Est{
     int titulo_eleitor;
     char Nome[50];
