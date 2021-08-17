@@ -113,7 +113,7 @@ void inOrderVotouWin(No *raiz, No *arvoreVotos){
 }
 
 
-//essa funcao imprimi os votos pelo metodo in order
+// //essa funcao imprimi os votos pelo metodo in order
 void inOrderVotos(No *raiz)
 {
     if (raiz)
@@ -164,8 +164,6 @@ void imprimeDecrescenteWin(No *no){
 	    printf("%c", 188);
         imprimeDecrescenteWin(no->esq);
     }
-
-
 }
 //essa funcao ordena a arvoreTitulos de acordo com a contagem de votos 
 //e retorna a arvore ordenada para arvoreDecrescente

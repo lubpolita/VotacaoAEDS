@@ -10,7 +10,6 @@ Info *retornaInfoVoto(No* pRaiz, int titulo);
 Info *retornaInfoTitulo(No* pRaiz, int titulo);
 void inOrderTitulos(No *raiz);
 void inOrderVotos(No *raiz);
-void resultadoParcial(No *no);
 void ordernaVotacao(No *arvoreTitulos, No **arvoreDecrescente);
 void imprimeDecrescente(No *no);
 void imprimeDecrescenteWin(No *no);
