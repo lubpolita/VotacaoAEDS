@@ -269,6 +269,7 @@ int main(){
 
             case 6:
                 //resultado parcial
+                arvoreOrdenada = liberar(&arvoreOrdenada);
                 ordernaVotacao(arvoreTitulos, &arvoreOrdenada); //ordena votacao e passa a arvore ordenada para "arvoreOrdenada"
                 #ifdef OS_Windows
                     imprimeDecrescenteWin(arvoreOrdenada);
